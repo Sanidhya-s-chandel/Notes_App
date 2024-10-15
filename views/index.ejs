@@ -24,35 +24,15 @@
         </div>
     </nav>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        <!-- Note 1 -->
-        <div class="bg-white p-4 rounded shadow-xl">
-            <h2 class="text-xl font-semibold mb-2">Meeting Notes</h2>
-            <p class="text-gray-600 mb-4">Discuss project timeline and deliverables...</p>
-            <div class="flex space-x-4">
-                <a href="#" class="text-blue-500 hover:underline">View Note</a>
-                <a href="#" class="text-green-500 hover:underline">Edit Note</a>
+        <% files.forEach(file => { %>
+            <div class="bg-white p-4 rounded shadow-xl">
+                <h2 class="text-xl font-semibold mb-2"><%= file.name %></h2>
+                <p class="text-gray-600 mb-4"><%= file.description %></p>
+                <div class="flex space-x-4">
+                    <a href="/<%= file.name %>" class="text-blue-500 hover:underline">View Note</a>
+                </div>
             </div>
-        </div>
-        
-        <!-- Note 2 -->
-        <div class="bg-white p-4 rounded shadow-xl">
-            <h2 class="text-xl font-semibold mb-2">Shopping List</h2>
-            <p class="text-gray-600 mb-4">Milk, eggs, bread, vegetables...</p>
-            <div class="flex space-x-4">
-                <a href="#" class="text-blue-500 hover:underline">View Note</a>
-                <a href="#" class="text-green-500 hover:underline">Edit Note</a>
-            </div>
-        </div>
-        
-        <!-- Note 3 -->
-        <div class="bg-white p-4 rounded shadow-xl">
-            <h2 class="text-xl font-semibold mb-2">Book Ideas</h2>
-            <p class="text-gray-600 mb-4">Brainstorm for new novel plot...</p>
-            <div class="flex space-x-4">
-                <a href="#" class="text-blue-500 hover:underline">View Note</a>
-                <a href="#" class="text-green-500 hover:underline">Edit Note</a>
-            </div>
-        </div>
+        <% }); %>
     </div>
 </div>
 </body>
