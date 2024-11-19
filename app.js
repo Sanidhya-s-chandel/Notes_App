@@ -32,10 +32,40 @@ app.post("/submit",(req,res)=>{
     })
 })
 
+app.get("/Update", (req, res) => {
+    const fileName = req.query.fileName;
+
+    fs.readFile(`./public/${fileName}`, 'utf8', (err, data) => {
+        if (err) {
+            res.status(404).send("File not found or error reading file");
+            return;
+        }
+
+        const lines = data.split('\n');
+        const noteDescription = lines[0]; 
+        const Data = lines.slice(1).join('\n');
+
+        res.render("update", { fileName, noteDescription, Data });
+    });
+});
+
+app.post('/Update', (req, res) => {
+    const { fileName, noteDescription, Data } = req.body;
+    const updatedContent = `${noteDescription}\n\n${Data}`;
+
+    fs.writeFile(`./public/${fileName}`, updatedContent, (err) => { 
+        if (err) {
+            res.status(500).send("Error updating file");
+        } else {
+            res.redirect('/'); 
+        }
+    });
+});
+
 app.get("/delete",(req,res)=>{
     fs.unlink(`./public/${req.query.fileName}`,(err)=>{
         if(err) throw err
-        else res.render("del")
+        else res.redirect("/")
     })
 })
 
